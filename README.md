@@ -1,6 +1,6 @@
 # Welcome to your CDK TypeScript project
 
-This is a blank project for CDK development with TypeScript.
+This deploys an API JSON to CSV file uploader and saves them in an S3 bucket.
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 

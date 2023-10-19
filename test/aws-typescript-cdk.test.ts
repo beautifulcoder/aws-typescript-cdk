@@ -1,17 +1,38 @@
-// import * as cdk from 'aws-cdk-lib';
-// import { Template } from 'aws-cdk-lib/assertions';
-// import * as AwsTypescriptCdk from '../lib/aws-typescript-cdk-stack';
+import { App } from 'aws-cdk-lib';
+import { Template } from 'aws-cdk-lib/assertions';
+import { AwsTypescriptCdkStack } from '../lib/aws-typescript-cdk-stack';
 
-// example test. To run these tests, uncomment this file along with the
-// example resource in lib/aws-typescript-cdk-stack.ts
-test('SQS Queue Created', () => {
-//   const app = new cdk.App();
-//     // WHEN
-//   const stack = new AwsTypescriptCdk.AwsTypescriptCdkStack(app, 'MyTestStack');
-//     // THEN
-//   const template = Template.fromStack(stack);
+test('S3 bucket created', () => {
+  const app = new App();
 
-//   template.hasResourceProperties('AWS::SQS::Queue', {
-//     VisibilityTimeout: 300
-//   });
+  const stack = new AwsTypescriptCdkStack(app, 'test-stack');
+  const template = Template.fromStack(stack);
+
+  template.hasResourceProperties('AWS::S3::Bucket', {
+  });
+});
+
+test('Lambda function created', () => {
+  const app = new App();
+
+  const stack = new AwsTypescriptCdkStack(app, 'test-stack');
+  const template = Template.fromStack(stack);
+
+  template.hasResourceProperties('AWS::Lambda::Function', {
+    Architectures: ['ar64'],
+    MemorySize: 1024
+  });
+});
+
+test('REST API created', () => {
+  const app = new App();
+
+  const stack = new AwsTypescriptCdkStack(app, 'test-stack');
+  const template = Template.fromStack(stack);
+
+  template.hasResourceProperties('AWS::ApiGateway::RestApi', {
+  });
+  template.hasResourceProperties('AWS::ApiGateway::Method', {
+    HttpMethod: 'POST'
+  });
 });
