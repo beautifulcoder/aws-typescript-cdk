@@ -8,8 +8,7 @@ test('S3 bucket created', () => {
   const stack = new AwsTypescriptCdkStack(app, 'test-stack');
   const template = Template.fromStack(stack);
 
-  template.hasResourceProperties('AWS::S3::Bucket', {
-  });
+  template.resourceCountIs('AWS::S3::Bucket', 1);
 });
 
 test('Lambda function created', () => {
@@ -19,7 +18,7 @@ test('Lambda function created', () => {
   const template = Template.fromStack(stack);
 
   template.hasResourceProperties('AWS::Lambda::Function', {
-    Architectures: ['ar64'],
+    Architectures: ['arm64'],
     MemorySize: 1024
   });
 });
@@ -30,8 +29,7 @@ test('REST API created', () => {
   const stack = new AwsTypescriptCdkStack(app, 'test-stack');
   const template = Template.fromStack(stack);
 
-  template.hasResourceProperties('AWS::ApiGateway::RestApi', {
-  });
+  template.resourceCountIs('AWS::ApiGateway::RestApi', 1);
   template.hasResourceProperties('AWS::ApiGateway::Method', {
     HttpMethod: 'POST'
   });
